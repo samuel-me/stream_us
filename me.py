@@ -36,7 +36,7 @@ pdf_path = "Summary.docx"
 # Create a Streamlit button to trigger the download
 if st.button("fonwload"):
     run()
-    )
+    
 
 
 #st.download_button('DOwnload button',data = 'h.csv', file_name = 'Summary.csv', mime ="text/docx")
