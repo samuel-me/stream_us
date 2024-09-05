@@ -8,7 +8,6 @@ streamlit
  docx2pdf
  Spire.Doc
  plum-dispatch==1.7.4
- requests
-zipfile 
+ requests 
 bs4
- 
+python==3.11
