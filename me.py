@@ -315,6 +315,8 @@ import streamlit as st  # pip install streamlit
 
 st.header(":mailbox: Hello researcher!")
 topic = st.text_input(label="Research Topic", placeholder="what are you working on?")
+into = st.text_input(label="Additional info.", placeholder="what is it about?")
+
 
 
 
