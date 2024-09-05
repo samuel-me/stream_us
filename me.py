@@ -342,7 +342,7 @@ pdf_path = "Summary.docx"
 
 # Create a Streamlit button to trigger the download
 if st.button("fonwload"):
-    run()
+    run(name)
     
 
 
