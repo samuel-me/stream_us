@@ -10,4 +10,4 @@ streamlit
  plum-dispatch==1.7.4
  requests 
 bs4
-sqlite3 == 3.35.0
+pysqlite3-binary
