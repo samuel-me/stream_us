@@ -314,7 +314,7 @@ import streamlit as st  # pip install streamlit
 
 
 st.header(":mailbox: Hello researcher!")
-topic = st.text_input(label="TOpic", placeholder="what are you working on?")
+topic = st.text_input(label="Research Topic", placeholder="what are you working on?")
 
 
 
@@ -346,7 +346,7 @@ pdf_path = "Summary.docx"
 
 
 # Create a Streamlit button to trigger the download
-if st.button("fonwload"):
+if st.button("REsearch"):
     data = parse(topic)
 
     err = []
