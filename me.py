@@ -281,6 +281,7 @@ def run(name):
     for i in down:
         reader = PdfReader(i)
         try:
+          global rag_rool
           rag_tool = ragtool(i)
           words = agents()
           you.append(words)
