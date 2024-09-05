@@ -1,4 +1,4 @@
-i
+
 import crewai
 import crewai_tools
 from groq import Groq
@@ -305,7 +305,7 @@ def doc():
 
     documents.save(file_name + '.docx')
 
-mport streamlit as st  # pip install streamlit
+import streamlit as st  # pip install streamlit
 
 st.header(":mailbox: Get In Touch With Me!")
 st.header(":mailbox: Hello researcher!")
