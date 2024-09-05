@@ -14,8 +14,10 @@ import streamlit as st
 import os
 
 def download_pdf(pdf_path):
-    """Downloads a PDF from the specified path."""
-    run()
+    """your files woule be ready soon, wait for another go button ready"""
+    import time
+    time.sleep(3)
+    """your files are ready"""
     if not os.path.exists(pdf_path):
         st.error(f"PDF file '{pdf_path}' not found.")
         return
@@ -24,14 +26,15 @@ def download_pdf(pdf_path):
         pdf_bytes = f.read()
 
     st.download_button(
-        label="Download PDF",
+        label="Download file",
         data=pdf_bytes,
         file_name=os.path.basename(pdf_path),
-        mime="application/pdf"
+        mime="application/docx"
     )
 
 # Replace 'path/to/your/pdf.pdf' with the actual path to your PDF file
-pdf_path = "AI_Summary.pdf"
+pdf_path = "Summary.docx"
+
 
 # Create a Streamlit button to trigger the download
 if st.button("fonwload"):
@@ -64,8 +67,7 @@ import string
 from pypdf import PdfReader
 
 from langchain_groq import ChatGroq
-from spire.doc import *
-from spire.doc.common import *
+
 
 from docx import Document
 
@@ -343,14 +345,14 @@ def run():
       else:
         print('too Long')
     doc()
-    pdf()
+    
 
         
 from docx import Document
 
 def doc():
     documents = Document()
-    file_name = 'AI_Summary'
+    file_name = 'Summary'
     documents.add_heading('AI Summary', 0)
     for i in range(len(you)):
       documents.add_heading(down[i].replace('/content/',''), level=1)
@@ -358,11 +360,4 @@ def doc():
 
     documents.save(file_name + '.docx')
 
-def pdf():
-    from spire.doc import *
-    from spire.doc.common import *
-    document = Document()
-    document.LoadFromFile(file_name+ '.docx')
-    # Save the file to a PDF file
-    document.SaveToFile(file_name+ '.pdf', FileFormat.PDF)
-    document.Close()
+
