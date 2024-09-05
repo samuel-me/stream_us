@@ -255,7 +255,7 @@ def agents():
 
   crew = my_crew.kickoff()
   return crew
-
+you = []   
 
 def run(name):
     data = parse(name)
@@ -277,7 +277,7 @@ def run(name):
         except:
             print(i)
 
-    you = []      
+       
     for i in down:
       reader = PdfReader(i)
       if len(reader.pages) <30:
