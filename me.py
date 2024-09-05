@@ -279,16 +279,16 @@ def run(name):
 
        
     for i in down:
-      reader = PdfReader(i)
-      if len(reader.pages) <30:
+        reader = PdfReader(i)
         try:
           rag_tool = ragtool(i)
           words = agents()
           you.append(words)
         except:
           pass
-      else:
-        print('too Long')
+      
+            
+
     doc()
     download_pdf(pdf_path)
 
@@ -307,7 +307,7 @@ def doc():
 
 import streamlit as st  # pip install streamlit
 
-st.header(":mailbox: Get In Touch With Me!")
+
 st.header(":mailbox: Hello researcher!")
 topic = st.text_input(label="TOpic", placeholder="what are you working on?")
 
