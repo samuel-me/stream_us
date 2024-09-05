@@ -12,7 +12,7 @@ import os
 
 def download_pdf(pdf_path):
     """your files woule be ready soon, wait for another go button ready"""
-    run()
+    
     
     """your files are ready"""
     if not os.path.exists(pdf_path):
@@ -35,7 +35,8 @@ pdf_path = "Summary.docx"
 
 # Create a Streamlit button to trigger the download
 if st.button("fonwload"):
-    download_pdf(pdf_path)
+    run()
+    )
 
 
 #st.download_button('DOwnload button',data = 'h.csv', file_name = 'Summary.csv', mime ="text/docx")
@@ -342,7 +343,7 @@ def run():
       else:
         print('too Long')
     doc()
-    
+    download_pdf(pdf_path
 
         
 from docx import Document
