@@ -10,5 +10,4 @@ streamlit
  plum-dispatch==1.7.4
  requests
  bs4
- zlib
  zipfile
