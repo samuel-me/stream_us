@@ -1,57 +1,4 @@
-import streamlit as st  # pip install streamlit
-
-st.header(":mailbox: Get In Touch With Me!")
-st.header(":mailbox: Hello researcher!")
-topic = st.text_input(label="TOpic", placeholder="what are you working on?")
-
-
-
-
-import streamlit as st
-import os
-
-def download_pdf(pdf_path):
-    """your files woule be ready soon, wait for another go button ready"""
-    
-    
-    """your files are ready"""
-    if not os.path.exists(pdf_path):
-        st.error(f"PDF file '{pdf_path}' not found.")
-        return
-
-    with open(pdf_path, 'rb') as f:
-        pdf_bytes = f.read()
-
-    st.download_button(
-        label="Download file",
-        data=pdf_bytes,
-        file_name=os.path.basename(pdf_path),
-        mime="application/docx"
-    )
-
-# Replace 'path/to/your/pdf.pdf' with the actual path to your PDF file
-pdf_path = "Summary.docx"
-
-
-# Create a Streamlit button to trigger the download
-if st.button("fonwload"):
-    run()
-    
-
-
-#st.download_button('DOwnload button',data = 'h.csv', file_name = 'Summary.csv', mime ="text/docx")
-# Use Local CSS File
-def local_css(file_name):
-    with open(file_name) as f:
-        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-
-
-local_css("style/style.css")
-
-
-
-
-
+i
 import crewai
 import crewai_tools
 from groq import Groq
@@ -86,14 +33,14 @@ import requests
 import bs4
 
 
-def openup():
+def openup(name):
     topic = name
     topic = topic.replace(' ','+')
     print(topic)
     return topic
 
-def parse():
-    topic = openup()
+def parse(name):
+    topic = openup(name)
     link = 'https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q='+topic+'&btnG='
     res = requests.get(link)
     res.raise_for_status()
@@ -310,8 +257,8 @@ def agents():
   return crew
 
 
-def run():
-    data = parse()
+def run(name):
+    data = parse(name)
 
     err = []
 
@@ -357,5 +304,58 @@ def doc():
       documents.add_paragraph(you[i].raw)
 
     documents.save(file_name + '.docx')
+
+mport streamlit as st  # pip install streamlit
+
+st.header(":mailbox: Get In Touch With Me!")
+st.header(":mailbox: Hello researcher!")
+topic = st.text_input(label="TOpic", placeholder="what are you working on?")
+
+
+
+
+import streamlit as st
+import os
+
+def download_pdf(pdf_path):
+    """your files woule be ready soon, wait for another go button ready"""
+    
+    
+    """your files are ready"""
+    if not os.path.exists(pdf_path):
+        st.error(f"PDF file '{pdf_path}' not found.")
+        return
+
+    with open(pdf_path, 'rb') as f:
+        pdf_bytes = f.read()
+
+    st.download_button(
+        label="Download file",
+        data=pdf_bytes,
+        file_name=os.path.basename(pdf_path),
+        mime="application/docx"
+    )
+
+# Replace 'path/to/your/pdf.pdf' with the actual path to your PDF file
+pdf_path = "Summary.docx"
+
+
+# Create a Streamlit button to trigger the download
+if st.button("fonwload"):
+    run()
+    
+
+
+#st.download_button('DOwnload button',data = 'h.csv', file_name = 'Summary.csv', mime ="text/docx")
+# Use Local CSS File
+def local_css(file_name):
+    with open(file_name) as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
+
+local_css("style/style.css")
+
+
+
 
 
