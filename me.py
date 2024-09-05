@@ -284,8 +284,9 @@ def run(name):
           rag_tool = ragtool(i)
           words = agents()
           you.append(words)
-        except:
-          pass
+        except Exception as exc:
+            print(exc)
+          
       
             
 
