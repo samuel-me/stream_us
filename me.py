@@ -280,15 +280,18 @@ def run(name):
        
     for i in down:
         reader = PdfReader(i)
+        print('my head')
         try:
           global rag_rool
           rag_tool = ragtool(i)
+          print('my nech')
           words = agents()
+          print('my hand')
           you.append(words)
         except Exception as exc:
             print(exc)
           
-      
+    return rag_tool
             
 
     doc()
@@ -344,7 +347,46 @@ pdf_path = "Summary.docx"
 
 # Create a Streamlit button to trigger the download
 if st.button("fonwload"):
-    run(topic)
+    data = parse(topic)
+
+    err = []
+
+
+    for i in data.keys():
+        try:
+            a = Sichub2(i)
+            down.append(a)
+        except:
+            err.append(i)
+
+    for i in err:
+        try:
+            b = google(i,data[i])
+            down.append(b)
+        except:
+            print(i)
+
+
+    for i in down:
+        reader = PdfReader(i)
+        print('my head')
+        try:
+          
+          rag_tool = ragtool(i)
+          print('my nech')
+          words = agents()
+          print('my hand')
+          you.append(words)
+        except Exception as exc:
+            print(exc)
+
+
+
+
+    doc()
+    download_pdf(pdf_path)
+
+
     
 
 
