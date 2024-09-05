@@ -3,9 +3,6 @@ import streamlit as st  # pip install streamlit
 st.header(":mailbox: Get In Touch With Me!")
 st.header(":mailbox: Hello researcher!")
 topic = st.text_input(label="TOpic", placeholder="what are you working on?")
-des = st.text_input(label="DEscription", placeholder="can you give a little info")
-nail = st.text_input(label="EMail", placeholder="Enter your email")
-
 
 
 
@@ -15,8 +12,8 @@ import os
 
 def download_pdf(pdf_path):
     """your files woule be ready soon, wait for another go button ready"""
-    import time
-    time.sleep(3)
+    run()
+    
     """your files are ready"""
     if not os.path.exists(pdf_path):
         st.error(f"PDF file '{pdf_path}' not found.")
