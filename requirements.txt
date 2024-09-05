@@ -1,2 +1,14 @@
 streamlit
-
+ crewai
+ crewai-tools
+ groq
+ langchain_huggingface
+ langchain-groq
+ python-docx
+ docx2pdf
+ Spire.Doc
+ plum-dispatch==1.7.4
+ requests
+ bs4
+ zlib
+ zipfile
