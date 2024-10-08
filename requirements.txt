@@ -12,7 +12,7 @@ langchain-community
 langchain
 langchain-huggingface
 pysqlite3-binary
-chromadb==0.4.23 
+chromadb
 pysqlite3
 streamlit
  crewai
