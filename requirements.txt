@@ -13,4 +13,4 @@ bs4
 pysqlite3-binary
 langchain-community
 langchain==0.2.16
-duckduckgo-search
+langchain-huggingface
