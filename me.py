@@ -5,6 +5,10 @@ import pysqlite3
 sys.modules['sqlite3'] = sys.modules["pysqlite3"]
 import chromadb
 
+
+import zlib
+import zipfile
+
 import crewai
 import crewai_tools
 from groq import Groq
@@ -23,11 +27,11 @@ from langchain_groq import ChatGroq
 from docx import Document
 
 ## api keys
-Groq_api_key = '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'
+Groq_api_key = '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'
 from langchain_groq import ChatGroq
 
 import os
-api_key = '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'
+api_key = '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'
 os.environ["GROQ_API_KEY"] = api_key
 
 ## the LLM
@@ -119,8 +123,8 @@ def google(title, url):
 #AVX
 
 down = []
-def Avx():
-  topic = openup()
+def Avx(topic):
+  topic = openup(topic)
   cat = classify(topic)
   link = 'https://arxiv.org/search/' + cat+ '?query=' + topic + '&searchtype=all&abstracts=show&order=-announced_date_first&size=50'
   res = requests.get(link)
@@ -323,7 +327,7 @@ import streamlit as st  # pip install streamlit
 st.header(":mailbox: Hello researcher!")
 topic = st.text_input(label="Research Topic", placeholder="what are you working on?")
 into = st.text_input(label="Additional info.", placeholder="what is it about?")
-
+Email = st.text_input(label="Email.", placeholder="what is your Email")
 
 
 
@@ -344,20 +348,70 @@ def download_pdf(pdf_path):
         pdf_bytes = f.read()
 
     st.download_button(
-        label="Download file",
+        label="Download Summary",
         data=pdf_bytes,
         file_name=os.path.basename(pdf_path),
         mime="application/docx"
     )
 
+def download_zip(pdf_path):
+    """your files woule be ready soon, wait for another go button ready"""
+    
+    
+    """your files are ready"""
+    if not os.path.exists(pdf_path):
+        st.error(f"PDF file '{pdf_path}' not found.")
+        return
+
+    with open(pdf_path, 'rb') as f:
+        pdf_bytes = f.read()
+
+    st.download_button(
+        label="Download file",
+        data=pdf_bytes,
+        file_name=os.path.basename(pdf_path),
+        mime="application/zip"
+    )
+
 # Replace 'path/to/your/pdf.pdf' with the actual path to your PDF file
 pdf_path = "Summary.docx"
+zipv= 'Papers.zip'
+import zlib
+import zipfile
 
+def compress(file_names):
+    print("File Paths:")
+    print(file_names)
+    file_names.append(pdf_path)
+#     path = "C:/data/"
+    # Select the compression mode ZIP_DEFLATED for compression
+    # or zipfile.ZIP_STORED to just store the file
+    compression = zipfile.ZIP_DEFLATED
+
+    # create the zip file first parameter path/name, second mode
+    zf = zipfile.ZipFile("Papers.zip", mode="w")
+    try:
+        for file_name in file_names:
+            # Add file to the zip file
+            # first parameter file to zip, second filename in zip
+            zf.write(file_name, file_name, compress_type=compression)
+
+    except FileNotFoundError:
+        print("An error occurred")
+    finally:
+        # Don't forget to close the file!
+        zf.close()
+
+
+## ######
+
+
+## ########
 
 # Create a Streamlit button to trigger the download
 if st.button("REsearch"):
     data = parse(topic)
-
+   
     err = []
 
 
@@ -391,9 +445,12 @@ if st.button("REsearch"):
 
 
 
-
+    compress(down)
+    
     doc()
-    download_pdf(pdf_path)
+    download_zip(zipv)
+    #download_pdf(pdf_path)
+    
 
 
     
