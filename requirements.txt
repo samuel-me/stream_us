@@ -12,7 +12,7 @@ streamlit
 bs4
 pysqlite3-binary
 langchain-community
-langchain==0.1.9
+langchain
 langchain-huggingface
 pysqlite3-binary
 chromadb==0.44
