@@ -315,7 +315,7 @@ def agents():
         description=f"""Oversee the integration of research findings and narrative development to produce a final comprehensive
         report on {topic}. Ensure the research is accurately represented and the narrative is engaging and informative.""",
         expected_output=f'A final comprehensive report that combines the research findings and narrative on {topic}.',
-        agent=manager
+        agent=manager_agent
     )
 
     # Forming the crew with a hierarchical process including the manager
