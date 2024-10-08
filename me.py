@@ -199,7 +199,7 @@ def ragtool(path):
           llm=dict(
               provider="groq", # or google, openai, anthropic, llama2, ...
               config=dict(
-                  model="llama3-8b-8192",
+                  model="groq/llma3-8b-8192",
                   # temperature=0.5,
                   # top_p=1,
                   # stream=true,
