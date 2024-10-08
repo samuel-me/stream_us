@@ -191,6 +191,7 @@ def classify(topic):
 
 # the tools 
 
+from langchain_huggingface import HuggingFaceEmbeddings
 from crewai_tools import PDFSearchTool
 def ragtool(path):
 
