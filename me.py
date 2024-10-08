@@ -1,4 +1,9 @@
 
+__import__('pysqlite3')
+import pysqlite3
+sys.modules['sqlite3'] = sys.modules["pysqlite3"]
+import chromadb
+
 import crewai
 import crewai_tools
 from groq import Groq
