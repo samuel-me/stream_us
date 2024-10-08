@@ -26,7 +26,7 @@ os.environ["GROQ_API_KEY"] = api_key
 
 ## the LLM
 
-llm = ChatGroq(model="llama3-8b-8192",api_key=Groq_api_key)
+llm = ChatGroq(model="groq/llama3-8b-8192",api_key=Groq_api_key)
 
 ## web scrapper
 import requests
