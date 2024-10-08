@@ -1,6 +1,6 @@
 streamlit
- crewai==0.51.1
- crewai-tools==0.8.3
+ crewai
+ crewai-tools
  groq
  langchain_huggingface
  langchain-groq
