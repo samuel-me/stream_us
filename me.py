@@ -145,7 +145,7 @@ def classify(topic):
 
   client = Groq(api_key = api_key)
   completion = client.chat.completions.create(
-      model="llama3-8b-8192",
+      model="groq/llama3-8b-8192",
       messages=[
           {
               "role": "user",
