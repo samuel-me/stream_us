@@ -14,3 +14,4 @@ pysqlite3-binary
 langchain-community
 langchain==0.2.16
 langchain-huggingface
+pysqlite3-binary
