@@ -4,24 +4,23 @@ import crewai_tools
 from groq import Groq
 from crewai import Agent
 from langchain.llms import OpenAI
+
+import os
 from crewai import Agent, Task, Crew, Process
 
 import string
 from pypdf import PdfReader
 
 from langchain_groq import ChatGroq
-import os
+
 
 from docx import Document
 
-from langchain_community.tools import DuckDuckGoSearchRun
-from langchain.agents import load_tools
-from langchain.tools import tool
-from crewai.tasks.task_output import TaskOutput
-
 ## api keys
 Groq_api_key = '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'
+from langchain_groq import ChatGroq
 
+import os
 api_key = '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'
 os.environ["GROQ_API_KEY"] = api_key
 
@@ -221,117 +220,41 @@ def ragtool(path):
 
 ##  The agent workflow
 def agents():
+  agent1 =Agent(
+      role="Ai guru",
+      goal="find the methodology and summarize it ",
+      backstory=" you are an Ai enthuisiat who is very passonate abiut te topic of the paper",
+      verbose=True,
+      llm = llm,
+      tools = [rag_tool]
+  )
 
+  task1 = Task(
+      expected_output=" a summary of the methoflogi",
+      description="you are to fins and summarisze the methodology of the paper",
+      agent=agent1,
+  )
 
-    search_tool = DuckDuckGoSearchRun()
+  agent2 =Agent(
+      role="A professional technical writer ",
+      goal="find the methodology and summarize it ",
+      backstory=" you are a very hardworking technical writer who doesn't overlook mistakes ",
+      verbose=True,
+      llm = llm,
+      context = [agent1]
+  )
 
-    # Define the topic of interest
-    topic = 'AI in healthcare'
+  task2 = Task(
+      expected_output=" a better written content gotten from agent 1",
+      description="rewrite the output of agent 1 in a better way, remove all the numbers and everything in brackets  ",
+      agent=agent1,
+  )
 
-    # Loading Human Tools
-    human_tools = load_tools(["human"])
+  my_crew = Crew(agents=[agent1,agent2], tasks=[task1,task2])
+  inputs ={"question":"give me an email from the file "}
 
-    def callback_function(output: TaskOutput):
-        # Do something after the task is completed
-        # Example: Send an email to the manager
-        print(f"""
-            Task completed!
-            Task: {output.description}
-            Output: {output.result}
-        """)
-
-    # Creating custom tools
-    class ContentTools:
-        @tool("Read webpage content")
-        def read_content(url: str) -> str:
-            """Read content from a webpage."""
-            response = requests.get(url)
-            soup = BeautifulSoup(response.content, 'html.parser')
-            text_content = soup.get_text()
-            return text_content[:5000]
-
-    # Define the manager agent
-    manager_agent = Agent(
-        role='Project Manager',
-        goal='Coordinate the project to ensure a seamless integration of research findings into compelling narratives',
-        verbose=True,
-        backstory="""With a strategic mindset and a knack for leadership, you excel at guiding teams towards
-        their goals, ensuring projects not only meet but exceed expectations.""",
-        allow_delegation=True,
-        max_iter=10,
-        max_rpm=20,
-        llm=llm
-    )
-
-    # Define the senior researcher agent
-    researcher = Agent(
-        role='Senior Researcher',
-        goal=f'Uncover groundbreaking technologies around {topic}',
-        verbose=True,
-        backstory="""Driven by curiosity, you're at the forefront of innovation, eager to explore and share
-        knowledge that could change the world.""",
-        llm=llm
-    )
-
-    # Define the writer agent
-    writer = Agent(
-        role='Writer',
-        goal=f'Narrate compelling tech stories around {topic}',
-        verbose=True,
-        backstory="""With a flair for simplifying complex topics, you craft engaging narratives that captivate
-        and educate, bringing new discoveries to light in an accessible manner.""",
-        llm=llm
-    )
-
-    # Define the asynchronous research tasks
-    list_ideas = Task(
-        description="List of 5 interesting ideas to explore for an article about {topic}.",
-        expected_output="Bullet point list of 5 ideas for an article.",
-        tools=[search_tool, ContentTools().read_content],
-        agent=researcher,
-        async_execution=True
-    )
-
-    list_important_history = Task(
-        description="Research the history of {topic} and identify the 5 most important events.",
-        expected_output="Bullet point list of 5 important events.",
-        tools=[search_tool, ContentTools().read_content],
-        agent=researcher,
-        async_execution=True
-    )
-
-    # Define the writing task that waits for the outputs of the two research tasks
-    write_article = Task(
-        description=f"Compose an insightful article on {topic}, including its history and the latest interesting ideas.",
-        expected_output="A 4 paragraph article about AI in healthcare.",
-        tools=[search_tool, ContentTools().read_content],
-        agent=writer,
-        context=[list_ideas, list_important_history],  # Depends on the completion of the two asynchronous tasks
-        callback=callback_function
-    )
-
-    # Define the manager's coordination task
-    manager_task = Task(
-        description=f"""Oversee the integration of research findings and narrative development to produce a final comprehensive
-        report on {topic}. Ensure the research is accurately represented and the narrative is engaging and informative.""",
-        expected_output=f'A final comprehensive report that combines the research findings and narrative on {topic}.',
-        agent=manager_agent
-    )
-
-    # Forming the crew with a hierarchical process including the manager
-    crew = Crew(
-        agents=[researcher, writer],
-        tasks=[list_ideas, list_important_history, write_article, manager_task],
-        process=Process.hierarchical,
-        manager_agent=manager_agent,
-        manager_llm=llm,
-    )
-
-    # Kick off the crew's work
-    results = crew.kickoff()
-
-    # Print the results
-    return results
+  crew = my_crew.kickoff()
+  return crew
 you = []   
 
 def run(name):
