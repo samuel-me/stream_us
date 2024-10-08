@@ -9,11 +9,11 @@
 bs4
 pysqlite3-binary
 langchain-community
-langchain
+langchain==0.2.16
 langchain-huggingface
 pysqlite3-binary
 chromadb==0.5.0
 pysqlite3
 streamlit
- crewai
- crewai-tools
+ crewai==0.51.0
+ crewai-tools==0.12.0
