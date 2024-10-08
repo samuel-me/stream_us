@@ -9,11 +9,11 @@ groq
 bs4
 pysqlite3-binary
 langchain-community
-langchain==0.2.16
+langchain
 langchain-huggingface
 pysqlite3-binary
 chromadb==0.4.23 
 pysqlite3
 streamlit
- crewai==0.51.0
+ crewai
  crewai-tools
