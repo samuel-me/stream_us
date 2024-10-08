@@ -10,7 +10,7 @@ import string
 from pypdf import PdfReader
 
 from langchain_groq import ChatGroq
-
+import os
 
 from docx import Document
 
