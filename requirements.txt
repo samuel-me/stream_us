@@ -12,3 +12,4 @@ streamlit
 bs4
 pysqlite3-binary
 langchain-community
+langchain
