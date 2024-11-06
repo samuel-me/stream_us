@@ -27,11 +27,11 @@ from langchain_groq import ChatGroq
 from docx import Document
 
 ## api keys
-Groq_api_key = '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'
+Groq_api_key = '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'
 from langchain_groq import ChatGroq
 
 import os
-api_key = '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'
+api_key = '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'
 os.environ["GROQ_API_KEY"] = api_key
 
 ## the LLM
