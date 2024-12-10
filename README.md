@@ -1,6 +1,6 @@
 # stream_us
 
-the Jupyter notebooks is names " my project"
+the Jupyter notebooks is titled " my project"/
 the main deployed code is the only python file in the fomser 
 
 fir online access: 
